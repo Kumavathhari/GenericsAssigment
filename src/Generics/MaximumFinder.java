@@ -8,10 +8,21 @@ public class MaximumFinder<T extends Comparable<T>> {
 
     @SafeVarargs
     public final T findMaximum(T... values) {
+        T max = findMax(values);
+        printMax(max);
+        return max;
+    }
+
+    @SafeVarargs
+    private T findMax(T... values) {
         List<T> valueList = Arrays.asList(values);
         Optional<T> maxOptional = valueList.stream()
                 .max(Comparable::compareTo);
         return maxOptional.orElse(null);
+    }
+
+    private void printMax(T max) {
+        System.out.println("Maximum value is: " + max);
     }
 
     public static void main(String[] args) {
