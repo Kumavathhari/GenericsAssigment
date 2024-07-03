@@ -1,25 +1,27 @@
 package Generics;
 
 public class MaximumFinder {
-    public static Integer findMaximum(Integer a, Integer b, Integer c) {
-        Integer max = a;
-        if (b.compareTo(max) > 0) {
+    public static float findMax(float a, float b, float c) {
+        float max = a;
+        if (b > max) {
             max = b;
         }
-        if (c.compareTo(max) > 0) {
+        if (c > max) {
             max = c;
         }
         return max;
     }
 
     public static void main(String[] args) {
-        Integer result1 = findMaximum(5, 3, 2);
-        System.out.println("Test Case 1.1 Result: " + result1);
+        float a1 = 3.5f, b1 = 7.2f, c1 = 5.1f;
+        System.out.println("Test Case 1: " + findMax(a1, b1, c1));
 
-        Integer result2 = findMaximum(3, 6, 2);
-        System.out.println("Test Case 1.2 Result: " + result2);
+        // Test Case 2
+        float a2 = -1.0f, b2 = -5.4f, c2 = -3.3f;
+        System.out.println("Test Case 2: " + findMax(a2, b2, c2));
 
-        Integer result3 = findMaximum(3, 2, 7);
-        System.out.println("Test Case 1.3 Result: " + result3);
+        // Test Case 3
+        float a3 = 0.0f, b3 = 0.0f, c3 = 0.0f;
+        System.out.println("Test Case 3: " + findMax(a3, b3, c3));
     }
 }
