@@ -1,48 +1,31 @@
 package Generics;
 
-public class MaximumFinder<T extends Comparable<T>>  {
-    private T a;
-    private T b;
-    private T c;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
-    public MaximumFinder(T a, T b, T c) {
-        this.a = a;
-        this.b = b;
-        this.c = c;
-    }
+public class MaximumFinder<T extends Comparable<T>> {
 
-    public T testMaximum() {
-        return MaximumFinder.findMaximum(a, b, c);
-    }
-
-    public static <T extends Comparable<T>> T findMaximum(T a, T b, T c) {
-        T max = a;
-        if (b.compareTo(max) > 0) {
-            max = b;
-        }
-        if (c.compareTo(max) > 0) {
-            max = c;
-        }
-        return max;
+    @SafeVarargs
+    public final T findMaximum(T... values) {
+        List<T> valueList = Arrays.asList(values);
+        Optional<T> maxOptional = valueList.stream()
+                .max(Comparable::compareTo);
+        return maxOptional.orElse(null);
     }
 
     public static void main(String[] args) {
-        MaximumFinder<String> stringFinder = new MaximumFinder<>("Apple", "Peach", "Banana");
-        System.out.println("Test Case 1 Result: " + stringFinder.testMaximum());
+        MaximumFinder<String> stringFinder = new MaximumFinder<>();
+        String result1 = stringFinder.findMaximum("Apple", "Peach", "Banana", "Orange");
+        System.out.println("Test Case 1 Result: " + result1);
 
-        MaximumFinder<String> stringFinder2 = new MaximumFinder<>("Zebra", "Lion", "Elephant");
-        System.out.println("Test Case 2 Result: " + stringFinder2.testMaximum());
+        MaximumFinder<Integer> integerFinder = new MaximumFinder<>();
+        Integer result2 = integerFinder.findMaximum(10, 5, 7, 15, 3);
+        System.out.println("Test Case 2 Result: " + result2);
 
-        MaximumFinder<String> stringFinder3 = new MaximumFinder<>("Cat", "Dog", "Bear");
-        System.out.println("Test Case 3 Result: " + stringFinder3.testMaximum());
-
-        MaximumFinder<Integer> integerFinder = new MaximumFinder<>(10, 5, 7);
-        System.out.println("Test Case 4 Result: " + integerFinder.testMaximum());
-
-        MaximumFinder<Integer> integerFinder2 = new MaximumFinder<>(3, 8, 4);
-        System.out.println("Test Case 5 Result: " + integerFinder2.testMaximum());
-
-        MaximumFinder<Integer> integerFinder3 = new MaximumFinder<>(1, 2, 9);
-        System.out.println("Test Case 6 Result: " + integerFinder3.testMaximum());
+        MaximumFinder<Double> doubleFinder = new MaximumFinder<>();
+        Double result3 = doubleFinder.findMaximum(2.5, 1.2, 5.8, 4.0);
+        System.out.println("Test Case 3 Result: " + result3);
     }
 }
+
